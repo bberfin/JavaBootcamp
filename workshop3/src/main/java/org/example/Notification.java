@@ -1,2 +1,5 @@
-package org.example;public interface Notification {
+package org.example;
+
+public interface Notification {
+    void sendNotify();
 }
