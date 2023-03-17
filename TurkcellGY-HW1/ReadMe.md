@@ -9,5 +9,3 @@ Bir oyun yazmak istiyorsunuz. Bu yazılım için backend kodlarını JAVA ile ge
 1.3. Sisteme yeni kampanya girişi, kampanyanın silinmesi ve güncellenmesi imkanlarını simule ediniz.
 
 1.4. Satışlarda kampanya entegrasyonunu simule ediniz.
-
-1.5. Ödevinizi Github’a yükleyiniz. Github linkinizi paylaşınız.
