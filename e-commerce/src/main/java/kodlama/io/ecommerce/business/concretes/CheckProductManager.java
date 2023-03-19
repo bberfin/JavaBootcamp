@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class CheckProductManager implements CheckProductService {
     @Override
     public boolean isValid(Product product) {
-        if (product.getPrice() <= 0
+        if (product.getUnitPrice() <= 0
                 || product.getQuantity() <= 0
                 || (product.getDescription().length() < 10 || product.getDescription().length() > 50)) {
             return false;

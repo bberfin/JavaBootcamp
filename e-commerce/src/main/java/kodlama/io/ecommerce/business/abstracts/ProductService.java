@@ -5,12 +5,13 @@ import kodlama.io.ecommerce.entities.concretes.Product;
 import java.util.List;
 
 public interface ProductService {
-    void addProduct(Product product);
+    Product add(Product product);
 
-    void removeProduct(int id);
+    void delete(int id);
 
-    void updateProduct(Product product, int id);
+    Product update(Product product, int id);
 
-    Product findProductById(int id);
-    List<Product> listProducts();
+    Product getById(int id);
+
+    List<Product> getAll();
 }

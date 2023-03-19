@@ -20,41 +20,49 @@ public class InMemoryProductRepository implements ProductRepository {
     }
 
     @Override
-    public void addProduct(Product product) {
+    public Product add(Product product) {
         products.add(product);
+        return product;
     }
 
     @Override
-    public void removeProduct(int id) {
-        for (Product product : products) {
+    public void delete(int id) {
+/*        for (Product product : products) {
             if (product.getId() == id)
                 products.remove(product);
-        }
+        }*/
+
+        products.remove(id - 1);
     }
 
     @Override
-    public void updateProduct(Product product, int id) {
-        for (Product product1 : products) {
+    public Product update(Product product, int id) {
+/*        for (Product product1 : products) {
             if (product1.getId() == id) {
                 product1.setDescription(product.getDescription());
                 product1.setName(product.getName());
-                product1.setPrice(product.getPrice());
+                product1.setUnitPrice(product.getUnitPrice());
                 product1.setQuantity(product.getQuantity());
             }
-        }
+        }*/
+
+        products.set(id - 1, product);
+        return product;
     }
 
     @Override
-    public Product findProductById(int id) {
-        for (Product product : products) {
+    public Product getById(int id) {
+/*        for (Product product : products) {
             if (product.getId() == id)
                 return product;
         }
-        return null;
+        return null;*/
+
+        return products.get(id - 1);
     }
 
     @Override
-    public List<Product> listProducts() {
+    public List<Product> getAll() {
         return products;
     }
 }

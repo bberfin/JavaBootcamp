@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class ProductManager implements ProductService {
 
-    private ProductRepository repository;
+    private final ProductRepository repository;
     private CheckProductService service;
 
     public ProductManager(ProductRepository repository, CheckProductService service) {
@@ -21,9 +21,9 @@ public class ProductManager implements ProductService {
     }
 
     @Override
-    public void addProduct(Product product) {
+    public Product add(Product product) {
 
-        if (!service.isValid(product)) {
+/*        if (!service.isValid(product)) {
 
             throw new RuntimeException("hatalı kayit");
         } else {
@@ -32,18 +32,23 @@ public class ProductManager implements ProductService {
             System.out.println("ürün basariyla eklendi");
         }
 
+        return product;*/
+
+        validateProduct(product);
+
+        return repository.add(product);
 
     }
 
     @Override
-    public void removeProduct(int id) {
-        if (repository.listProducts().size() == 0) {
+    public void delete(int id) {
+        if (repository.getAll().size() == 0) {
             throw new RuntimeException("ürün yok");
-        } else if (repository.findProductById(id) == null) {
+        } else if (repository.getById(id) == null) {
             throw new RuntimeException("ürün bulunamadi");
 
         } else {
-            repository.removeProduct(id);
+            repository.delete(id);
             System.out.println("ürün basariyla silindi");
         }
 
@@ -51,8 +56,8 @@ public class ProductManager implements ProductService {
     }
 
     @Override
-    public void updateProduct(Product product, int id) {
-        if (repository.listProducts().size() == 0) {
+    public Product update(Product product, int id) {
+/*        if (repository.listProducts().size() == 0) {
             throw new RuntimeException("ürün yok");
         } else if (repository.findProductById(id) == null) {
             throw new RuntimeException("bu id ile ürün bulunamadi");
@@ -62,26 +67,56 @@ public class ProductManager implements ProductService {
             repository.updateProduct(product, id);
             System.out.println("ürün basariyla güncellendi");
         }
+        return product;*/
+
+        validateProduct(product);
+
+        repository.update(product, id);
+        return product;
 
 
     }
 
-    @Override
-    public Product findProductById(int id) {
 
-        if (repository.findProductById(id) == null) {
+    @Override
+    public Product getById(int id) {
+
+        if (repository.getById(id) == null) {
             throw new RuntimeException("ürün bulunamadi");
         }
 
-        return repository.findProductById(id);
+        return repository.getById(id);
 
     }
 
     @Override
-    public List<Product> listProducts() {
-        if (repository.listProducts().size() == 0) {
+    public List<Product> getAll() {
+        if (repository.getAll().size() == 0) {
             throw new RuntimeException("ürün listesi bos");
         }
-        return repository.listProducts();
+        return repository.getAll();
+    }
+
+//BUSINESS RULES
+
+    private void validateProduct(Product product){
+        checkIfUnitPriceValid(product);
+        checkIfDescriptionLengthValid(product);
+        checkIfQuantityValid(product);
+    }
+
+    private void checkIfDescriptionLengthValid(Product product) {
+        if(product.getDescription().length() <10 || product.getDescription().length()>50)
+            throw new IllegalArgumentException("description length must be between 10 and 50 characters");
+    }
+
+    private void checkIfQuantityValid(Product product) {
+        if (product.getQuantity() < 0)
+            throw new IllegalArgumentException("quantity cannot be less than zero");
+    }
+
+    private void checkIfUnitPriceValid(Product product) {
+        if (product.getUnitPrice() <= 0)
+            throw new IllegalArgumentException("price cannot be less than or equal to zero");
     }
 }
