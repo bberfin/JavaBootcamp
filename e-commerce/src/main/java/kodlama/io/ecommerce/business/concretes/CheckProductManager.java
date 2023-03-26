@@ -1,7 +1,7 @@
 package kodlama.io.ecommerce.business.concretes;
 
 import kodlama.io.ecommerce.business.abstracts.CheckProductService;
-import kodlama.io.ecommerce.entities.concretes.Product;
+import kodlama.io.ecommerce.entities.Product;
 import org.springframework.stereotype.Service;
 
 @Service
