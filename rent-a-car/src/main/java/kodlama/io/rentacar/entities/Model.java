@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -27,5 +29,5 @@ public class Model {
     private Brand brand;
 
     @OneToMany(mappedBy = "model")
-    private List<Car> cars;
+    private Set<Car> cars =new HashSet<>();
 }

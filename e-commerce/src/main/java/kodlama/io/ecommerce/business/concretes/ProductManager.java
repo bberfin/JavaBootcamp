@@ -2,9 +2,16 @@ package kodlama.io.ecommerce.business.concretes;
 
 import kodlama.io.ecommerce.business.abstracts.CheckProductService;
 import kodlama.io.ecommerce.business.abstracts.ProductService;
+import kodlama.io.ecommerce.dto.requests.create.CreateProductRequest;
+import kodlama.io.ecommerce.dto.requests.update.UpdateProductRequest;
+import kodlama.io.ecommerce.dto.responses.create.CreateProductResponse;
+import kodlama.io.ecommerce.dto.responses.get.GetAllProductsResponse;
+import kodlama.io.ecommerce.dto.responses.get.GetProductResponse;
+import kodlama.io.ecommerce.dto.responses.update.UpdateProductResponse;
 import kodlama.io.ecommerce.entities.Product;
 import kodlama.io.ecommerce.repository.ProductRepository;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,67 +20,53 @@ import java.util.List;
 @Service
 public class ProductManager implements ProductService {
 
+    private ModelMapper mapper;
     private final ProductRepository repository;
-    private CheckProductService service;
+    private final CheckProductService checkProductService;
 
     @Override
-    public Product add(Product product) {
-        validateProduct(product);
-        return repository.save(product);
+    public List<GetAllProductsResponse> getAll() {
+        List<Product> products = repository.findAll();
+        List<GetAllProductsResponse> response = products
+                .stream()
+                .map(product -> mapper.map(product, GetAllProductsResponse.class))
+                .toList();
+        return response;
+    }
+
+    @Override
+    public GetProductResponse getById(int id) {
+        checkProductService.checkIfProductExists(id);
+        Product product = repository.findById(id).orElseThrow();
+        GetProductResponse response = mapper.map(product, GetProductResponse.class);
+        return response;
+    }
+
+    @Override
+    public CreateProductResponse add(CreateProductRequest request) {
+        Product product = mapper.map(request, Product.class);
+        checkProductService.validateProduct(product);
+        product.setId(0);
+        repository.save(product);
+
+        CreateProductResponse response = mapper.map(product, CreateProductResponse.class);
+        return response;
+    }
+    @Override
+    public UpdateProductResponse update(int id, UpdateProductRequest request) {
+        checkProductService.checkIfProductExists(id);
+        Product product = mapper.map(request, Product.class);
+        checkProductService.validateProduct(product);
+        product.setId(id);
+        repository.save(product);
+
+        UpdateProductResponse response = mapper.map(product, UpdateProductResponse.class);
+        return response;
     }
 
     @Override
     public void delete(int id) {
-        checkIfProductExists(id);
+        checkProductService.checkIfProductExists(id);
         repository.deleteById(id);
-    }
-
-    @Override
-    public Product update(Product product, int id) {
-        checkIfProductExists(id);
-        validateProduct(product);
-        product.setId(id);
-        return repository.save(product);
-    }
-
-    @Override
-    public Product getById(int id) {
-        checkIfProductExists(id);
-        return repository.findById(id).orElseThrow();
-
-    }
-
-    @Override
-    public List<Product> getAll() {
-        return repository.findAll();
-    }
-
-//BUSINESS RULES
-
-    private void validateProduct(Product product){
-        checkIfUnitPriceValid(product);
-        checkIfDescriptionLengthValid(product);
-        checkIfQuantityValid(product);
-    }
-
-    private void checkIfDescriptionLengthValid(Product product) {
-        if(product.getDescription().length() <10 || product.getDescription().length()>50)
-            throw new IllegalArgumentException("description length must be between 10 and 50 characters");
-    }
-
-    private void checkIfQuantityValid(Product product) {
-        if (product.getQuantity() < 0)
-            throw new IllegalArgumentException("quantity cannot be less than zero");
-    }
-
-    private void checkIfUnitPriceValid(Product product) {
-        if (product.getUnitPrice() <= 0)
-            throw new IllegalArgumentException("price cannot be less than or equal to zero");
-    }
-
-
-    //BUSINESS RULES
-    private void checkIfProductExists(int id) {
-        if (!repository.existsById(id)) throw new IllegalArgumentException("böyle bir ürün mevcut değil.");
     }
 }

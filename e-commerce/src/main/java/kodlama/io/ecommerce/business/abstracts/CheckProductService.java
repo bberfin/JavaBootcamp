@@ -4,5 +4,6 @@ import kodlama.io.ecommerce.entities.Product;
 
 
 public interface CheckProductService {
-    boolean isValid(Product product);
+    void validateProduct(Product product);
+    void checkIfProductExists(int id);
 }

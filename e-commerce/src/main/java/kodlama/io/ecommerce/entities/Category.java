@@ -1,9 +1,7 @@
 package kodlama.io.ecommerce.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import kodlama.io.ecommerce.entities.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,21 +16,21 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "products")
-public class Product {
+@Table(name = "categories")
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private int quantity;
-    private double unitPrice;
-    private String description;
-    @Enumerated(EnumType.STRING)
-    private Status status;
 
-    @JsonBackReference //sonsuz döngüyü önlemek için (child)
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
-    private Set<Category> categories = new HashSet<>();
+    @JsonManagedReference  //sonsuz döngüyü önlemek için (parent)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Product> products=new HashSet<>();
 
 }
