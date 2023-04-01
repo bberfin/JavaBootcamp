@@ -1,12 +1,12 @@
 package kodlama.io.rentacar.business.concretes;
 
 import kodlama.io.rentacar.business.abstracts.ModelService;
-import kodlama.io.rentacar.business.dto.requests.create.CreateModelRequest;
-import kodlama.io.rentacar.business.dto.requests.update.UpdateModelRequest;
-import kodlama.io.rentacar.business.dto.responses.create.CreateModelResponse;
-import kodlama.io.rentacar.business.dto.responses.get.GetAllModelsResponse;
-import kodlama.io.rentacar.business.dto.responses.get.GetModelResponse;
-import kodlama.io.rentacar.business.dto.responses.update.UpdateModelResponse;
+import kodlama.io.rentacar.business.dto.requests.create.model.CreateModelRequest;
+import kodlama.io.rentacar.business.dto.requests.update.model.UpdateModelRequest;
+import kodlama.io.rentacar.business.dto.responses.create.model.CreateModelResponse;
+import kodlama.io.rentacar.business.dto.responses.get.model.GetAllModelsResponse;
+import kodlama.io.rentacar.business.dto.responses.get.model.GetModelResponse;
+import kodlama.io.rentacar.business.dto.responses.update.model.UpdateModelResponse;
 import kodlama.io.rentacar.entities.Model;
 import kodlama.io.rentacar.repository.ModelRepository;
 import lombok.AllArgsConstructor;
@@ -34,15 +34,16 @@ public class ModelManager implements ModelService {
 
     @Override
     public GetModelResponse getById(int id) {
-        checkIfModelExists(id);
-        Model model= repository.findById(id).orElseThrow();
+        checkIfModelExistsById(id);
+        Model model = repository.findById(id).orElseThrow();
         GetModelResponse response = mapper.map(model, GetModelResponse.class);
         return response;
     }
 
     @Override
     public CreateModelResponse add(CreateModelRequest request) {
-        Model model= mapper.map(request, Model.class);
+        checkIfModelExistsByName(request.getName());
+        Model model = mapper.map(request, Model.class);
         model.setId(0);
         repository.save(model);
         CreateModelResponse response = mapper.map(model, CreateModelResponse.class);
@@ -51,8 +52,8 @@ public class ModelManager implements ModelService {
 
     @Override
     public UpdateModelResponse update(int id, UpdateModelRequest request) {
-        checkIfModelExists(id);
-        Model model= mapper.map(request, Model.class);
+        checkIfModelExistsById(id);
+        Model model = mapper.map(request, Model.class);
         model.setId(id);
         repository.save(model);
         UpdateModelResponse response = mapper.map(model, UpdateModelResponse.class);
@@ -61,12 +62,17 @@ public class ModelManager implements ModelService {
 
     @Override
     public void delete(int id) {
-        checkIfModelExists(id);
+        checkIfModelExistsById(id);
         repository.deleteById(id);
     }
 
     //BUSINESS RULES
-    private void checkIfModelExists(int id) {
+    private void checkIfModelExistsById(int id) {
         if (!repository.existsById(id)) throw new IllegalArgumentException("böyle bir model mevcut değil.");
+    }
+
+    private void checkIfModelExistsByName(String name) {
+        if (repository.existsByNameIgnoreCase(name))
+            throw new IllegalArgumentException("böyle bir model sistemde kayıtlı.");
     }
 }

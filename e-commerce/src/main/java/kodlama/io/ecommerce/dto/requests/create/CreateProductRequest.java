@@ -13,6 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateProductRequest {
+    private int categoryId;
     private String name;
     private int quantity;
     private double unitPrice;

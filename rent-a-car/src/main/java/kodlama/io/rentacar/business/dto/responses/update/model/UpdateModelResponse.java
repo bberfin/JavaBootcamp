@@ -1,4 +1,4 @@
-package kodlama.io.rentacar.business.dto.responses.get;
+package kodlama.io.rentacar.business.dto.responses.update.model;
 
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetAllModelsResponse {
+public class UpdateModelResponse {
     private int id;
+    private int brandId;
     private String name;
 }

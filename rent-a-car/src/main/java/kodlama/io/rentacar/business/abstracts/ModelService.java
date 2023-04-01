@@ -1,11 +1,11 @@
 package kodlama.io.rentacar.business.abstracts;
 
-import kodlama.io.rentacar.business.dto.requests.create.CreateModelRequest;
-import kodlama.io.rentacar.business.dto.requests.update.UpdateModelRequest;
-import kodlama.io.rentacar.business.dto.responses.create.CreateModelResponse;
-import kodlama.io.rentacar.business.dto.responses.get.GetAllModelsResponse;
-import kodlama.io.rentacar.business.dto.responses.get.GetModelResponse;
-import kodlama.io.rentacar.business.dto.responses.update.UpdateModelResponse;
+import kodlama.io.rentacar.business.dto.requests.create.model.CreateModelRequest;
+import kodlama.io.rentacar.business.dto.requests.update.model.UpdateModelRequest;
+import kodlama.io.rentacar.business.dto.responses.create.model.CreateModelResponse;
+import kodlama.io.rentacar.business.dto.responses.get.model.GetAllModelsResponse;
+import kodlama.io.rentacar.business.dto.responses.get.model.GetModelResponse;
+import kodlama.io.rentacar.business.dto.responses.update.model.UpdateModelResponse;
 
 import java.util.List;
 

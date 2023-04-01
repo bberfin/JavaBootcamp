@@ -1,6 +1,5 @@
-package kodlama.io.rentacar.business.dto.responses.get;
+package kodlama.io.rentacar.business.dto.requests.create.brand;
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetModelResponse {
-    private int id;
+public class CreateBrandRequest {
     private String name;
 }

@@ -1,5 +1,6 @@
-package kodlama.io.ecommerce.dto.responses.create;
+package kodlama.io.rentacar.business.dto.responses.get.model;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,8 +10,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateCategoryResponse {
+public class GetAllModelsResponse {
     private int id;
-    private int productId;
+    private int brandId;
     private String name;
+    private String brandName;
+
 }

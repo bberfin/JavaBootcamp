@@ -1,13 +1,12 @@
 package kodlama.io.rentacar.api.controllers;
 
 import kodlama.io.rentacar.business.abstracts.ModelService;
-import kodlama.io.rentacar.business.dto.requests.create.CreateModelRequest;
-import kodlama.io.rentacar.business.dto.requests.update.UpdateModelRequest;
-import kodlama.io.rentacar.business.dto.responses.create.CreateModelResponse;
-import kodlama.io.rentacar.business.dto.responses.get.GetAllModelsResponse;
-import kodlama.io.rentacar.business.dto.responses.get.GetModelResponse;
-import kodlama.io.rentacar.business.dto.responses.update.UpdateModelResponse;
-import kodlama.io.rentacar.entities.Model;
+import kodlama.io.rentacar.business.dto.requests.create.model.CreateModelRequest;
+import kodlama.io.rentacar.business.dto.requests.update.model.UpdateModelRequest;
+import kodlama.io.rentacar.business.dto.responses.create.model.CreateModelResponse;
+import kodlama.io.rentacar.business.dto.responses.get.model.GetAllModelsResponse;
+import kodlama.io.rentacar.business.dto.responses.get.model.GetModelResponse;
+import kodlama.io.rentacar.business.dto.responses.update.model.UpdateModelResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +31,7 @@ public class ModelsController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED) //201
     public CreateModelResponse add(@RequestBody CreateModelRequest request) {
         return service.add(request);
     }
@@ -43,7 +42,7 @@ public class ModelsController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.NO_CONTENT) //204
     public void delete(@PathVariable int id) {
         service.delete(id);
     }

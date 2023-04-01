@@ -9,6 +9,7 @@ import kodlama.io.ecommerce.dto.responses.get.GetAllProductsResponse;
 import kodlama.io.ecommerce.dto.responses.get.GetProductResponse;
 import kodlama.io.ecommerce.dto.responses.update.UpdateProductResponse;
 import kodlama.io.ecommerce.entities.Product;
+import kodlama.io.ecommerce.repository.CategoryRepository;
 import kodlama.io.ecommerce.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -21,12 +22,13 @@ import java.util.List;
 public class ProductManager implements ProductService {
 
     private ModelMapper mapper;
-    private final ProductRepository repository;
+    private final ProductRepository productRepository;
+    private final CategoryRepository  categoryRepository;
     private final CheckProductService checkProductService;
 
     @Override
     public List<GetAllProductsResponse> getAll() {
-        List<Product> products = repository.findAll();
+        List<Product> products = productRepository.findAll();
         List<GetAllProductsResponse> response = products
                 .stream()
                 .map(product -> mapper.map(product, GetAllProductsResponse.class))
@@ -37,7 +39,7 @@ public class ProductManager implements ProductService {
     @Override
     public GetProductResponse getById(int id) {
         checkProductService.checkIfProductExists(id);
-        Product product = repository.findById(id).orElseThrow();
+        Product product = productRepository.findById(id).orElseThrow();
         GetProductResponse response = mapper.map(product, GetProductResponse.class);
         return response;
     }
@@ -47,7 +49,8 @@ public class ProductManager implements ProductService {
         Product product = mapper.map(request, Product.class);
         checkProductService.validateProduct(product);
         product.setId(0);
-        repository.save(product);
+        productRepository.save(product);
+
 
         CreateProductResponse response = mapper.map(product, CreateProductResponse.class);
         return response;
@@ -58,7 +61,7 @@ public class ProductManager implements ProductService {
         Product product = mapper.map(request, Product.class);
         checkProductService.validateProduct(product);
         product.setId(id);
-        repository.save(product);
+        productRepository.save(product);
 
         UpdateProductResponse response = mapper.map(product, UpdateProductResponse.class);
         return response;
@@ -67,6 +70,6 @@ public class ProductManager implements ProductService {
     @Override
     public void delete(int id) {
         checkProductService.checkIfProductExists(id);
-        repository.deleteById(id);
+        productRepository.deleteById(id);
     }
 }

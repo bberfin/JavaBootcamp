@@ -1,12 +1,12 @@
 package kodlama.io.rentacar.api.controllers;
 
 import kodlama.io.rentacar.business.abstracts.CarService;
-import kodlama.io.rentacar.business.dto.requests.create.CreateCarRequest;
-import kodlama.io.rentacar.business.dto.requests.update.UpdateCarRequest;
-import kodlama.io.rentacar.business.dto.responses.create.CreateCarResponse;
-import kodlama.io.rentacar.business.dto.responses.get.GetAllCarsResponse;
-import kodlama.io.rentacar.business.dto.responses.get.GetCarResponse;
-import kodlama.io.rentacar.business.dto.responses.update.UpdateCarResponse;
+import kodlama.io.rentacar.business.dto.requests.create.car.CreateCarRequest;
+import kodlama.io.rentacar.business.dto.requests.update.car.UpdateCarRequest;
+import kodlama.io.rentacar.business.dto.responses.create.car.CreateCarResponse;
+import kodlama.io.rentacar.business.dto.responses.get.car.GetAllCarsResponse;
+import kodlama.io.rentacar.business.dto.responses.get.car.GetCarResponse;
+import kodlama.io.rentacar.business.dto.responses.update.car.UpdateCarResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/cars")
 public class CarsController {
 
-    private CarService service;
+    private final CarService service;
 
     @GetMapping
     public List<GetAllCarsResponse> getAll() {

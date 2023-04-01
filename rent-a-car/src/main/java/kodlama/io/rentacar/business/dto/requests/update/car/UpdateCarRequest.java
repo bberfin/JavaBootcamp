@@ -1,4 +1,4 @@
-package kodlama.io.rentacar.business.dto.responses.update;
+package kodlama.io.rentacar.business.dto.requests.update.car;
 
 import kodlama.io.rentacar.entities.enums.State;
 import lombok.AllArgsConstructor;
@@ -10,8 +10,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateCarResponse {
-    private int id;
+public class UpdateCarRequest {
+    private int modelId;
     private int modelYear;
     private String plate;
     private State state;

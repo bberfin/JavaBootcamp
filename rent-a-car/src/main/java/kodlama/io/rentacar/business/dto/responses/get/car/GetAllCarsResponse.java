@@ -1,4 +1,4 @@
-package kodlama.io.rentacar.business.dto.responses.get;
+package kodlama.io.rentacar.business.dto.responses.get.car;
 
 import kodlama.io.rentacar.entities.enums.State;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class GetAllCarsResponse {
     private int id;
+    private int modelId;
     private int modelYear;
+    private String modelName;
     private String plate;
     private State state;
     private double dailyPrice;
