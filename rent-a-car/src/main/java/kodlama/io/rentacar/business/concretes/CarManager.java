@@ -8,6 +8,7 @@ import kodlama.io.rentacar.business.dto.responses.get.car.GetAllCarsResponse;
 import kodlama.io.rentacar.business.dto.responses.get.car.GetCarResponse;
 import kodlama.io.rentacar.business.dto.responses.update.car.UpdateCarResponse;
 import kodlama.io.rentacar.entities.Car;
+import kodlama.io.rentacar.entities.enums.State;
 import kodlama.io.rentacar.repository.CarRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -33,9 +34,29 @@ public class CarManager implements CarService {
     }
 
     @Override
+    public List<GetAllCarsResponse> getAll(boolean isIncludeMaintenanceCars) {
+        List<Car> cars = repository.findAll();
+        if(isIncludeMaintenanceCars){
+            List<GetAllCarsResponse> response = cars
+                    .stream()
+                    .map(car -> mapper.map(car, GetAllCarsResponse.class))
+                    .toList();
+            return response;
+        }
+        else{
+            List<GetAllCarsResponse> response = cars
+                    .stream()
+                    .filter(car -> car.getState()!= State.MAINTENANCE)
+                    .map(car -> mapper.map(car, GetAllCarsResponse.class))
+                    .toList();
+            return response;
+        }
+    }
+
+    @Override
     public GetCarResponse getById(int id) {
         checkIfCarExistsById(id);
-        Car car= repository.findById(id).orElseThrow();
+        Car car = repository.findById(id).orElseThrow();
         GetCarResponse response = mapper.map(car, GetCarResponse.class);
         return response;
     }
@@ -43,21 +64,21 @@ public class CarManager implements CarService {
     @Override
     public CreateCarResponse add(CreateCarRequest request) {
         checkIfCarExistsByPlate(request.getPlate());
-        Car car= mapper.map(request, Car.class);
+        Car car = mapper.map(request, Car.class);
         car.setId(0);
-        repository.save(car);
-        CreateCarResponse response= mapper.map(car, CreateCarResponse.class);
+        Car createdCar = repository.save(car);
+        CreateCarResponse response = mapper.map(createdCar, CreateCarResponse.class);
         return response;
     }
 
     @Override
     public UpdateCarResponse update(int id, UpdateCarRequest request) {
         checkIfCarExistsById(id);
-        Car car= mapper.map(request, Car.class);
+        Car car = mapper.map(request, Car.class);
         car.setId(id);
         repository.save(car);
 
-        UpdateCarResponse response= mapper.map(car, UpdateCarResponse.class);
+        UpdateCarResponse response = mapper.map(car, UpdateCarResponse.class);
         return response;
     }
 
@@ -73,6 +94,7 @@ public class CarManager implements CarService {
     }
 
     private void checkIfCarExistsByPlate(String plate) {
-        if (repository.existsByPlateIgnoreCase(plate)) throw new IllegalArgumentException("böyle bir plaka sistemde mevcut.");
+        if (repository.existsByPlateIgnoreCase(plate))
+            throw new IllegalArgumentException("böyle bir plaka sistemde mevcut.");
     }
 }

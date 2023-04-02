@@ -31,4 +31,8 @@ public class Car {
     @JoinColumn(name = "model_id")
     private Model model;
 
+    @ManyToOne
+    @JoinColumn(name = "maintenance_id")
+    private Maintenance maintenance;
+
 }

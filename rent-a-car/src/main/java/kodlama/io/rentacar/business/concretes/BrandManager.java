@@ -65,9 +65,9 @@ public class BrandManager implements BrandService {
         checkIfBrandExistsByName(request.getName());
         Brand brand = mapper.map(request, Brand.class);
         brand.setId(0);
-        repository.save(brand);
+        Brand createdBrand = repository.save(brand);
 
-        CreateBrandResponse response = mapper.map(brand, CreateBrandResponse.class);
+        CreateBrandResponse response = mapper.map(createdBrand, CreateBrandResponse.class);
 
         return response;
     }
@@ -75,11 +75,11 @@ public class BrandManager implements BrandService {
     @Override
     public UpdateBrandResponse update(int id, UpdateBrandRequest request) {
         checkIfBrandExistsById(id);
-        Brand brand= mapper.map(request, Brand.class);
+        Brand brand = mapper.map(request, Brand.class);
         brand.setId(id);
         repository.save(brand);
 
-        UpdateBrandResponse response = mapper.map(brand, UpdateBrandResponse.class );
+        UpdateBrandResponse response = mapper.map(brand, UpdateBrandResponse.class);
         return response;
     }
 
@@ -94,7 +94,8 @@ public class BrandManager implements BrandService {
         if (!repository.existsById(id)) throw new IllegalArgumentException("böyle bir marka mevcut değil.");
     }
 
-    private void checkIfBrandExistsByName(String name){
-        if(repository.existsByNameIgnoreCase(name))throw new IllegalArgumentException("böyle bir marka sistemde kayıtlı.");
+    private void checkIfBrandExistsByName(String name) {
+        if (repository.existsByNameIgnoreCase(name))
+            throw new IllegalArgumentException("böyle bir marka sistemde kayıtlı.");
     }
 }

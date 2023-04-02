@@ -24,6 +24,9 @@ public class CarsController {
     public List<GetAllCarsResponse> getAll() {
         return service.getAll();
     }
+    public List<GetAllCarsResponse> getAll(@PathVariable boolean isIncludeMaintenanceCar) {
+        return service.getAll(isIncludeMaintenanceCar);
+    }
 
     @GetMapping("/{id}")
     public GetCarResponse getById(@PathVariable int id) {
