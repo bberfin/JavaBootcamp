@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/api/brands")
 public class BrandsController {
-    private BrandService service;
+    private final BrandService service;
 
     @GetMapping
     public List<GetAllBrandsResponse> getAll() {

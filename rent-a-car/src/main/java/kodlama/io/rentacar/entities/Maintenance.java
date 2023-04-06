@@ -7,18 +7,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "maintenances")
 public class Maintenance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Boolean isMaintainable;
 
-    @OneToMany(mappedBy = "maintenance")
+    private String information;
+    private Boolean isCompleted;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+
+    @ManyToOne
+    @JoinColumn(name = "car_id")
     private Car car;
 }

@@ -24,8 +24,8 @@ public class CarManager implements CarService {
     private final ModelMapper mapper;
 
     @Override
-    public List<GetAllCarsResponse> getAll() {
-        List<Car> cars = repository.findAll();
+    public List<GetAllCarsResponse> getAll(boolean includeMaintenance) {
+        List<Car> cars = filterCarsByMaintenanceState(includeMaintenance);
         List<GetAllCarsResponse> response = cars
                 .stream()
                 .map(car -> mapper.map(car, GetAllCarsResponse.class))
@@ -34,30 +34,11 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public List<GetAllCarsResponse> getAll(boolean isIncludeMaintenanceCars) {
-        List<Car> cars = repository.findAll();
-        if(isIncludeMaintenanceCars){
-            List<GetAllCarsResponse> response = cars
-                    .stream()
-                    .map(car -> mapper.map(car, GetAllCarsResponse.class))
-                    .toList();
-            return response;
-        }
-        else{
-            List<GetAllCarsResponse> response = cars
-                    .stream()
-                    .filter(car -> car.getState()!= State.MAINTENANCE)
-                    .map(car -> mapper.map(car, GetAllCarsResponse.class))
-                    .toList();
-            return response;
-        }
-    }
-
-    @Override
     public GetCarResponse getById(int id) {
         checkIfCarExistsById(id);
         Car car = repository.findById(id).orElseThrow();
         GetCarResponse response = mapper.map(car, GetCarResponse.class);
+//        response.setBrandName(car.getModel().getBrand().getName());
         return response;
     }
 
@@ -66,8 +47,10 @@ public class CarManager implements CarService {
         checkIfCarExistsByPlate(request.getPlate());
         Car car = mapper.map(request, Car.class);
         car.setId(0);
-        Car createdCar = repository.save(car);
-        CreateCarResponse response = mapper.map(createdCar, CreateCarResponse.class);
+        car.setState(State.AVAILABLE);
+        repository.save(car);
+        CreateCarResponse response = mapper.map(car, CreateCarResponse.class);
+
         return response;
     }
 
@@ -77,8 +60,8 @@ public class CarManager implements CarService {
         Car car = mapper.map(request, Car.class);
         car.setId(id);
         repository.save(car);
-
         UpdateCarResponse response = mapper.map(car, UpdateCarResponse.class);
+
         return response;
     }
 
@@ -86,6 +69,13 @@ public class CarManager implements CarService {
     public void delete(int id) {
         checkIfCarExistsById(id);
         repository.deleteById(id);
+    }
+
+    @Override
+    public void changeState(int carId, State state) {
+        Car car = repository.findById(carId).orElseThrow();
+        car.setState(state);
+        repository.save(car); //update
     }
 
     //BUSINESS RULES
@@ -97,4 +87,12 @@ public class CarManager implements CarService {
         if (repository.existsByPlateIgnoreCase(plate))
             throw new IllegalArgumentException("böyle bir plaka sistemde mevcut.");
     }
+
+    private List<Car> filterCarsByMaintenanceState(boolean includeMaintenance){
+        if(includeMaintenance)
+            return repository.findAll();
+
+        return repository.findAllByStateIsNot(State.MAINTENANCE);
+    }
+
 }

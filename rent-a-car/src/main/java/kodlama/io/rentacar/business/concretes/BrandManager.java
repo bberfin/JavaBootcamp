@@ -40,13 +40,12 @@ public class BrandManager implements BrandService {
 
     @Override
     public GetBrandResponse getById(int id) {
-        checkIfBrandExistsById(id);
-
 //        Brand brand = repository.findById(id).orElseThrow();
 //        GetBrandResponse response = new GetBrandResponse();
 //        response.setId(brand.getId());
 //        response.setName(brand.getName());
 
+        checkIfBrandExistsById(id);
         Brand brand = repository.findById(id).orElseThrow();
         GetBrandResponse response = mapper.map(brand, GetBrandResponse.class);
 
@@ -62,12 +61,12 @@ public class BrandManager implements BrandService {
 //        CreateBrandResponse response = new CreateBrandResponse();
 //        response.setId(brand.getId());
 //        response.setName(brand.getName());
+
         checkIfBrandExistsByName(request.getName());
         Brand brand = mapper.map(request, Brand.class);
         brand.setId(0);
-        Brand createdBrand = repository.save(brand);
-
-        CreateBrandResponse response = mapper.map(createdBrand, CreateBrandResponse.class);
+        repository.save(brand);
+        CreateBrandResponse response = mapper.map(brand, CreateBrandResponse.class);
 
         return response;
     }
@@ -78,8 +77,8 @@ public class BrandManager implements BrandService {
         Brand brand = mapper.map(request, Brand.class);
         brand.setId(id);
         repository.save(brand);
-
         UpdateBrandResponse response = mapper.map(brand, UpdateBrandResponse.class);
+
         return response;
     }
 
@@ -91,11 +90,11 @@ public class BrandManager implements BrandService {
 
     //BUSINESS RULES
     private void checkIfBrandExistsById(int id) {
-        if (!repository.existsById(id)) throw new IllegalArgumentException("böyle bir marka mevcut değil.");
+        if (!repository.existsById(id)) throw new RuntimeException("Böyle bir marka mevcut değil.");
     }
 
     private void checkIfBrandExistsByName(String name) {
         if (repository.existsByNameIgnoreCase(name))
-            throw new IllegalArgumentException("böyle bir marka sistemde kayıtlı.");
+            throw new RuntimeException("Böyle bir marka sistemde kayıtlı.");
     }
 }
