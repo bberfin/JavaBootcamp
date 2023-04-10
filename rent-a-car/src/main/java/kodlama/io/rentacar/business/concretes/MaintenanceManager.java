@@ -88,13 +88,15 @@ public class MaintenanceManager implements MaintenanceService {
     @Override
     public void delete(int id) {
         checkIfMaintenanceExists(id);
+        makeCarAvailableIfIsCompletedFalse(id);
         repository.deleteById(id);
     }
 
     //business rules
-    private void checkIfCarIsExists(int carId) {
-        if (carService.getById(carId) == null) {
-            throw new RuntimeException("Böyle bir araç bulunamadı.");
+    private void makeCarAvailableIfIsCompletedFalse(int id) {
+        int carId = repository.findById(id).get().getCar().getId();
+        if (repository.existsByCarIdAndIsCompletedIsFalse(carId)) {
+            carService.changeState(carId, State.AVAILABLE);
         }
     }
 
