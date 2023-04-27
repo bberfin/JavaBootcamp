@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CarRepository extends JpaRepository<Car, Integer> {
-    boolean existsByPlateIgnoreCase(String plate);
+    boolean existsByPlate(String plate);
     List<Car> findAllByStateIsNot(State state); //state i parametredeki state olmayanları getir
 }

@@ -7,10 +7,13 @@ import kodlama.io.rentacar.business.dto.responses.create.brand.CreateBrandRespon
 import kodlama.io.rentacar.business.dto.responses.get.brand.GetAllBrandsResponse;
 import kodlama.io.rentacar.business.dto.responses.get.brand.GetBrandResponse;
 import kodlama.io.rentacar.business.dto.responses.update.brand.UpdateBrandResponse;
+import kodlama.io.rentacar.business.rules.BrandBusinessRules;
 import kodlama.io.rentacar.entities.Brand;
 import kodlama.io.rentacar.repository.BrandRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +24,10 @@ public class BrandManager implements BrandService {
 
     private final BrandRepository repository;
     private final ModelMapper mapper;
+    private final BrandBusinessRules rules;
 
     @Override
+    @Cacheable(value = "brand_list")
     public List<GetAllBrandsResponse> getAll() {
 //        List<Brand> brands = repository.findAll();
 //        List<GetAllBrandsResponse> response = new ArrayList<>();
@@ -45,7 +50,7 @@ public class BrandManager implements BrandService {
 //        response.setId(brand.getId());
 //        response.setName(brand.getName());
 
-        checkIfBrandExistsById(id);
+        rules.checkIfBrandExistsById(id);
         Brand brand = repository.findById(id).orElseThrow();
         GetBrandResponse response = mapper.map(brand, GetBrandResponse.class);
 
@@ -53,6 +58,7 @@ public class BrandManager implements BrandService {
     }
 
     @Override
+    @CacheEvict(value = "brand_list", allEntries = true)
     public CreateBrandResponse add(CreateBrandRequest request) {
 //        Brand brand = new Brand();
 //        brand.setName(request.getName());
@@ -62,7 +68,7 @@ public class BrandManager implements BrandService {
 //        response.setId(brand.getId());
 //        response.setName(brand.getName());
 
-        checkIfBrandExistsByName(request.getName());
+        rules.checkIfBrandExistsByName(request.getName());
         Brand brand = mapper.map(request, Brand.class);
         brand.setId(0);
         repository.save(brand);
@@ -72,8 +78,9 @@ public class BrandManager implements BrandService {
     }
 
     @Override
+    @CacheEvict(value = "brand_list", allEntries = true)
     public UpdateBrandResponse update(int id, UpdateBrandRequest request) {
-        checkIfBrandExistsById(id);
+        rules.checkIfBrandExistsById(id);
         Brand brand = mapper.map(request, Brand.class);
         brand.setId(id);
         repository.save(brand);
@@ -83,18 +90,12 @@ public class BrandManager implements BrandService {
     }
 
     @Override
+    @CacheEvict(value = "brand_list", allEntries = true)
     public void delete(int id) {
-        checkIfBrandExistsById(id);
+        rules.checkIfBrandExistsById(id);
         repository.deleteById(id);
     }
 
-    //BUSINESS RULES
-    private void checkIfBrandExistsById(int id) {
-        if (!repository.existsById(id)) throw new RuntimeException("Böyle bir marka mevcut değil.");
-    }
 
-    private void checkIfBrandExistsByName(String name) {
-        if (repository.existsByNameIgnoreCase(name))
-            throw new RuntimeException("Böyle bir marka sistemde kayıtlı.");
-    }
+
 }

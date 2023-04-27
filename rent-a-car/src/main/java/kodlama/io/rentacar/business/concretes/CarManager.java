@@ -7,6 +7,7 @@ import kodlama.io.rentacar.business.dto.responses.create.car.CreateCarResponse;
 import kodlama.io.rentacar.business.dto.responses.get.car.GetAllCarsResponse;
 import kodlama.io.rentacar.business.dto.responses.get.car.GetCarResponse;
 import kodlama.io.rentacar.business.dto.responses.update.car.UpdateCarResponse;
+import kodlama.io.rentacar.business.rules.CarBusinessRules;
 import kodlama.io.rentacar.entities.Car;
 import kodlama.io.rentacar.entities.enums.State;
 import kodlama.io.rentacar.repository.CarRepository;
@@ -22,6 +23,7 @@ public class CarManager implements CarService {
 
     private final CarRepository repository;
     private final ModelMapper mapper;
+    private final CarBusinessRules rules;
 
     @Override
     public List<GetAllCarsResponse> getAll(boolean includeMaintenance) {
@@ -35,7 +37,7 @@ public class CarManager implements CarService {
 
     @Override
     public GetCarResponse getById(int id) {
-        checkIfCarExistsById(id);
+        rules.checkIfCarExistsById(id);
         Car car = repository.findById(id).orElseThrow();
         GetCarResponse response = mapper.map(car, GetCarResponse.class);
 //        response.setBrandName(car.getModel().getBrand().getName());
@@ -44,7 +46,7 @@ public class CarManager implements CarService {
 
     @Override
     public CreateCarResponse add(CreateCarRequest request) {
-        checkIfCarExistsByPlate(request.getPlate());
+        rules.checkIfCarExistsByPlate(request.getPlate());
         Car car = mapper.map(request, Car.class);
         car.setId(0);
         car.setState(State.AVAILABLE);
@@ -56,7 +58,7 @@ public class CarManager implements CarService {
 
     @Override
     public UpdateCarResponse update(int id, UpdateCarRequest request) {
-        checkIfCarExistsById(id);
+        rules.checkIfCarExistsById(id);
         Car car = mapper.map(request, Car.class);
         car.setId(id);
         repository.save(car);
@@ -67,7 +69,7 @@ public class CarManager implements CarService {
 
     @Override
     public void delete(int id) {
-        checkIfCarExistsById(id);
+        rules.checkIfCarExistsById(id);
         repository.deleteById(id);
     }
 
@@ -78,15 +80,8 @@ public class CarManager implements CarService {
         repository.save(car); //update
     }
 
-    //BUSINESS RULES
-    private void checkIfCarExistsById(int id) {
-        if (!repository.existsById(id)) throw new IllegalArgumentException("böyle bir araba mevcut değil.");
-    }
+    ////////////////
 
-    private void checkIfCarExistsByPlate(String plate) {
-        if (repository.existsByPlateIgnoreCase(plate))
-            throw new IllegalArgumentException("böyle bir plaka sistemde mevcut.");
-    }
 
     private List<Car> filterCarsByMaintenanceState(boolean includeMaintenance){
         if(includeMaintenance)
