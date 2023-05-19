@@ -1,6 +1,6 @@
 spring:
   application:
-    name: FILTER-SERVICE
+    name: filter-service
   data:
     mongodb:
       database: filter-db-dev
