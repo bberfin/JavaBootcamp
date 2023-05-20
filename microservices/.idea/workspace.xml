@@ -5,10 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83fbb80a-3693-4dad-9ca3-813ee6597521" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/maintenance-service/src/main/java/com/kodlamaio/maintenanceservice/api/clients/CarClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maintenance-service/src/main/java/com/kodlamaio/maintenanceservice/api/clients/CarClientFallback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/com/kodlamaio/commonpackage/utils/constants/Paths.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/com/kodlamaio/commonpackage/utils/constants/Paths.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/discovery-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/discovery-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/filter-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/filter-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/kodlamaio/inventoryservice/business/dto/requests/create/Car/CreateCarRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/kodlamaio/inventoryservice/business/dto/requests/create/Car/CreateCarRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/kodlamaio/inventoryservice/business/dto/requests/update/Car/UpdateCarRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/kodlamaio/inventoryservice/business/dto/requests/update/Car/UpdateCarRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/kodlamaio/inventoryservice/entities/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/kodlamaio/inventoryservice/entities/Car.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inventory-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rental-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/rental-service/src/main/resources/application.yml" afterDir="false" />
     </list>
@@ -60,7 +72,7 @@
     "WebServerToolWindowFactoryState": "false",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "19",
-    "last_opened_file_path": "C:/Users/brfna/OneDrive/Masaüstü/TurkcellJavaBootcamp/microservices",
+    "last_opened_file_path": "C:/Users/brfna/OneDrive/Masaüstü/TurkcellJavaBootcamp/microservices/maintenance-service/src/main/java/com/kodlamaio/maintenanceservice/api",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -70,21 +82,26 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "editor.preferences.import",
-    "spring.configuration.checksum": "a633d222912a93b75ff455909583567a",
+    "spring.configuration.checksum": "a22ff115ff05c1cef839b836741bd57d",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
       "postgresql",
-      "mongo"
+      "mongo",
+      "mysql"
     ]
   }
 }]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.kodlamaio.commonpackage.utils.annotations" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\brfna\OneDrive\Masaüstü\TurkcellJavaBootcamp\microservices\maintenance-service\src\main\java\com\kodlamaio\maintenanceservice\api" />
       <recent name="C:\Users\brfna\OneDrive\Masaüstü\TurkcellJavaBootcamp\microservices\filter-service\src\main\java\com\kodlamaio\filterservice" />
       <recent name="C:\Users\brfna\OneDrive\Masaüstü\microservices\microservices\inventory-service\src\main\java\com\kodlamaio\inventoryservice\business\dto\responses\update" />
       <recent name="C:\Users\brfna\OneDrive\Masaüstü\microservices\microservices\inventory-service\src\main\java\com\kodlamaio\inventoryservice\business\dto\responses\get" />
@@ -107,7 +124,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ApiGatewayApplication">
+  <component name="RunManager" selected="Spring Boot.InventoryServiceApplication">
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.kodlamaio.apigateway.ApiGatewayApplication" />
@@ -143,6 +160,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MaintenanceServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="maintenance-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.kodlamaio.maintenanceservice.MaintenanceServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PaymentServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="payment-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.kodlamaio.paymentservice.PaymentServiceApplication" />
@@ -158,6 +182,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Spring Boot.MaintenanceServiceApplication" />
       <item itemvalue="Spring Boot.PaymentServiceApplication" />
       <item itemvalue="Spring Boot.RentalServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
@@ -191,6 +216,9 @@
       <workItem from="1684436040212" duration="1042000" />
       <workItem from="1684437119169" duration="12768000" />
       <workItem from="1684512248025" duration="3941000" />
+      <workItem from="1684563898076" duration="7271000" />
+      <workItem from="1684573781908" duration="5721000" />
+      <workItem from="1684597906269" duration="7646000" />
     </task>
     <servers />
   </component>

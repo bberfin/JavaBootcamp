@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="inventory-service" />
         <module name="payment-service" />
+        <module name="maintenance-service" />
         <module name="common-package" />
         <module name="api-gateway" />
         <module name="filter-service" />
@@ -24,6 +25,7 @@
       <module name="discovery-service" options="-parameters" />
       <module name="filter-service" options="-parameters" />
       <module name="inventory-service" options="-parameters" />
+      <module name="maintenance-service" options="-parameters" />
       <module name="payment-service" options="-parameters" />
       <module name="rental-service" options="-parameters" />
     </option>

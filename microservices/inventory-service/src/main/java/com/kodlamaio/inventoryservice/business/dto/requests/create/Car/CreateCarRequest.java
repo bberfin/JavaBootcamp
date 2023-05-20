@@ -1,5 +1,6 @@
 package com.kodlamaio.inventoryservice.business.dto.requests.create.Car;
 
+import com.kodlamaio.commonpackage.utils.annotations.NotFutureYear;
 import com.kodlamaio.commonpackage.utils.constants.Regex;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -21,7 +22,8 @@ public class CreateCarRequest {
     @NotNull
     private UUID modelId;
     @Min(value = 2000)
-    //TODO: NotFuture custom annotation
+
+    @NotFutureYear
     private int modelYear;
 
     @NotBlank
