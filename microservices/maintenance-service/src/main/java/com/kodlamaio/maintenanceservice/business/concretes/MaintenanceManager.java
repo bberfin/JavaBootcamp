@@ -72,13 +72,12 @@ public class MaintenanceManager implements MaintenanceService {
 
         rules.ensureCarIsAvailable(request.getCarId());
         //rules.checkCarAvailabilityForMaintenance(carService.getById(request.getCarId()).getState());
-        Maintenance maintenance = mapper.forResponse().map(request, Maintenance.class);
+        Maintenance maintenance = mapper.forRequest().map(request, Maintenance.class);
         maintenance.setId(null);
         maintenance.setIsCompleted(false);
         maintenance.setStartDate(LocalDateTime.now());
         maintenance.setEndDate(null);
         repository.save(maintenance);
-
         sendKafkaMaintenanceCreatedEvent(request.getCarId());
         //carService.changeState(request.getCarId(), State.MAINTENANCE);
 

@@ -21,8 +21,8 @@ public class CreateCarRequest {
 
     @NotNull
     private UUID modelId;
-    @Min(value = 2000)
 
+    @Min(value = 2000)
     @NotFutureYear
     private int modelYear;
 

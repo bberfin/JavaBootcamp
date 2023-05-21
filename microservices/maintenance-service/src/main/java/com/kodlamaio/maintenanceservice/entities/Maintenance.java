@@ -19,11 +19,11 @@ public class Maintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
+    private UUID carId;
     private String information;
     private Boolean isCompleted;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
-    private UUID carId;
+
 }

@@ -7,6 +7,7 @@ import com.kodlamaio.maintenanceservice.business.dto.responses.create.CreateMain
 import com.kodlamaio.maintenanceservice.business.dto.responses.get.GetAllMaintenancesResponse;
 import com.kodlamaio.maintenanceservice.business.dto.responses.get.GetMaintenanceResponse;
 import com.kodlamaio.maintenanceservice.business.dto.responses.update.UpdateMaintenanceResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,11 @@ import java.util.UUID;
 @RequestMapping("/api/maintenances")
 public class MaintenancesControllers {
     private final MaintenanceService service;
+
+//    @PostConstruct
+//    public void createdb() throws InterruptedException {
+//        service.add(new CreateMaintenanceRequest());
+//    }
 
     @GetMapping
     public List<GetAllMaintenancesResponse> getAll() {
@@ -36,13 +42,13 @@ public class MaintenancesControllers {
     }
 
     @PutMapping("/{id}")
-    public UpdateMaintenanceResponse update(@PathVariable UUID id, @RequestBody UpdateMaintenanceRequest request) {
+    public UpdateMaintenanceResponse update(@PathVariable UUID id, @Valid @RequestBody UpdateMaintenanceRequest request) {
         return service.update(id, request);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateMaintenanceResponse add(@RequestBody CreateMaintenanceRequest request) throws InterruptedException {
+    public CreateMaintenanceResponse add(@Valid @RequestBody CreateMaintenanceRequest request) throws InterruptedException {
         return service.add(request);
     }
 

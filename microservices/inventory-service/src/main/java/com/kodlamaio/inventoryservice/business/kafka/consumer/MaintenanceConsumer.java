@@ -43,6 +43,6 @@ public class MaintenanceConsumer {
     public void consume(MaintenanceCompletedEvent event) {
         //change car state
         service.changeStateByCarId(State.AVAILABLE, event.getCarId());
-        log.info("maintenance deleted event completed {}", event);
+        log.info("maintenance event completed {}", event);
     }
 }
