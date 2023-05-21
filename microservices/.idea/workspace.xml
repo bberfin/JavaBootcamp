@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83fbb80a-3693-4dad-9ca3-813ee6597521" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b426ad42-94c3-42a6-9fab-643057b00099.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b426ad42-94c3-42a6-9fab-643057b00099.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fc565601-3e47-4206-9c42-8838aaa07138.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fc565601-3e47-4206-9c42-8838aaa07138.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/adapters/FakePosServiceAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/adapters/FakePosServiceAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/api/controllers/PaymentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/api/controllers/PaymentsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/concretes/PaymentManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/concretes/PaymentManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/dto/requests/PaymentRequest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/dto/requests/create/CreatePaymentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/dto/requests/create/CreatePaymentRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/dto/requests/update/UpdatePaymentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/dto/requests/update/UpdatePaymentRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/dto/responses/create/CreatePaymentResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/dto/responses/create/CreatePaymentResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/dto/responses/get/GetAllPaymentsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/dto/responses/get/GetAllPaymentsResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/dto/responses/get/GetPaymentResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/dto/responses/get/GetPaymentResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/dto/responses/update/UpdatePaymentsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/src/main/java/com/kodlamaio/paymentservice/business/dto/responses/update/UpdatePaymentsResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rental-service/src/main/java/com/kodlamaio/rentalservice/api/clients/PaymentClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rental-service/src/main/java/com/kodlamaio/rentalservice/api/clients/PaymentClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +110,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.RentalServiceApplication">
+  <component name="RunManager" selected="Spring Boot.ApiGatewayApplication">
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.kodlamaio.apigateway.ApiGatewayApplication" />
@@ -219,6 +210,7 @@
       <workItem from="1684668995689" duration="2154000" />
       <workItem from="1684678705468" duration="4493000" />
       <workItem from="1684683974152" duration="1402000" />
+      <workItem from="1684685541669" duration="372000" />
     </task>
     <servers />
   </component>
