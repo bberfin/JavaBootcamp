@@ -46,6 +46,7 @@ public class PaymentManager implements PaymentService {
     public CreatePaymentResponse add(CreatePaymentRequest request) {
         rules.checkIfCardExists(request);
         var payment = mapper.forRequest().map(request, Payment.class);
+        payment.setId(null);
         repository.save(payment);
 
         return mapper.forResponse().map(payment, CreatePaymentResponse.class);
