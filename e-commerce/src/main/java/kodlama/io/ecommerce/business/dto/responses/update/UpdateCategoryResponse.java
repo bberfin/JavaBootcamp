@@ -1,15 +1,17 @@
-package kodlama.io.ecommerce.dto.requests.create;
+package kodlama.io.ecommerce.business.dto.responses.update;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateCategoryRequest {
-    private int productId;
+public class UpdateCategoryResponse {
+    private UUID id;
     private String name;
 }

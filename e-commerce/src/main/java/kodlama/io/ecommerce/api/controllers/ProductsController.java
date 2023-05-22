@@ -1,18 +1,18 @@
 package kodlama.io.ecommerce.api.controllers;
 
 import kodlama.io.ecommerce.business.abstracts.ProductService;
-import kodlama.io.ecommerce.dto.requests.create.CreateProductRequest;
-import kodlama.io.ecommerce.dto.requests.update.UpdateProductRequest;
-import kodlama.io.ecommerce.dto.responses.create.CreateProductResponse;
-import kodlama.io.ecommerce.dto.responses.get.GetAllProductsResponse;
-import kodlama.io.ecommerce.dto.responses.get.GetProductResponse;
-import kodlama.io.ecommerce.dto.responses.update.UpdateProductResponse;
-import kodlama.io.ecommerce.entities.Product;
+import kodlama.io.ecommerce.business.dto.requests.create.CreateProductRequest;
+import kodlama.io.ecommerce.business.dto.requests.update.UpdateProductRequest;
+import kodlama.io.ecommerce.business.dto.responses.create.CreateProductResponse;
+import kodlama.io.ecommerce.business.dto.responses.get.GetAllProductsResponse;
+import kodlama.io.ecommerce.business.dto.responses.get.GetProductResponse;
+import kodlama.io.ecommerce.business.dto.responses.update.UpdateProductResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -27,7 +27,7 @@ public class ProductsController {
     }
 
     @GetMapping("/{id}")
-    public GetProductResponse getById(@PathVariable int id) {
+    public GetProductResponse getById(@PathVariable UUID id) {
         return service.getById(id);
     }
 
@@ -38,13 +38,13 @@ public class ProductsController {
     }
 
     @PutMapping("/{id}")
-    public UpdateProductResponse update(@PathVariable int id, @RequestBody UpdateProductRequest request) {
+    public UpdateProductResponse update(@PathVariable UUID id, @RequestBody UpdateProductRequest request) {
         return service.update(id, request);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id) {
+    public void delete(@PathVariable UUID id) {
         service.delete(id);
     }
 }

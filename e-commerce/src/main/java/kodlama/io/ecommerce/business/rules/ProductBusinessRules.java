@@ -1,27 +1,25 @@
-package kodlama.io.ecommerce.business.concretes;
+package kodlama.io.ecommerce.business.rules;
 
-import kodlama.io.ecommerce.business.abstracts.CheckProductService;
 import kodlama.io.ecommerce.entities.Product;
 import kodlama.io.ecommerce.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
-public class CheckProductManager implements CheckProductService {
+@RequiredArgsConstructor
+public class ProductBusinessRules {
+    private final ProductRepository repository;
 
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Override
     public void validateProduct(Product product){
         checkIfUnitPriceValid(product);
         checkIfDescriptionLengthValid(product);
         checkIfQuantityValid(product);
     }
 
-    @Override
-    public void checkIfProductExists(int id) {
-        if (!productRepository.existsById(id)) throw new IllegalArgumentException("böyle bir ürün mevcut değil.");
+    public void checkIfProductExists(UUID id) {
+        if (!repository.existsById(id)) throw new IllegalArgumentException("böyle bir ürün mevcut değil.");
     }
 
     private void checkIfDescriptionLengthValid(Product product) {
@@ -38,5 +36,4 @@ public class CheckProductManager implements CheckProductService {
         if (product.getUnitPrice() <= 0)
             throw new IllegalArgumentException("price cannot be less than or equal to zero");
     }
-
 }

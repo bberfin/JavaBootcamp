@@ -12,6 +12,7 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -22,8 +23,8 @@ import java.util.Set;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private String name;
     private int quantity;
     private double unitPrice;
@@ -32,7 +33,7 @@ public class Product {
     private Status status;
 
     @JsonBackReference //sonsuz döngüyü önlemek için (child)
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "products")
     private Set<Category> categories = new HashSet<>();
 
 }

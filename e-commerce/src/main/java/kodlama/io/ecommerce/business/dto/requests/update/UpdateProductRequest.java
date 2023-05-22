@@ -1,19 +1,20 @@
-package kodlama.io.ecommerce.dto.requests.create;
+package kodlama.io.ecommerce.business.dto.requests.update;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import kodlama.io.ecommerce.entities.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateProductRequest {
-    private int categoryId;
+public class UpdateProductRequest {
+    private List<UUID> categoryIds;
     private String name;
     private int quantity;
     private double unitPrice;
