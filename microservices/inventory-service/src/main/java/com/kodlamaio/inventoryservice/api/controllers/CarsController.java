@@ -50,12 +50,12 @@ public class CarsController {
         service.delete(id);
     }
 
-    @GetMapping("/check-car-available/{id}")
+    @GetMapping("/get-car-for-invoice/{id}")
     public CarClientResponse getByIdForInvoice(@PathVariable UUID id)
     {
         return service.getByIdForInvoice(id);
     }
-    @GetMapping("/get-car-for-invoice/{id}")
+    @GetMapping("/check-car-available/{id}")
     public ClientResponse checkIfCarAvailable(@PathVariable UUID id)
     {
         return service.checkIfCarAvailable(id);
