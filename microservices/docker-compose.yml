@@ -16,6 +16,14 @@ services:
     volumes:
       - mongodb_data:/data/db
 
+  mongodb2:
+    container_name: invoice-db-dev
+    image: mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb2_data:/data/db
+
   mysqldb:
     container_name: maintenance-db-dev
     environment:
@@ -31,4 +39,5 @@ services:
 volumes:
   kafka_data:
   mongodb_data:
+  mongodb2_data:
   mysqldb_data:

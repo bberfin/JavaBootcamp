@@ -1,5 +1,6 @@
 package com.kodlamaio.rentalservice.api.clients;
 
+import com.kodlamaio.commonpackage.events.inventory.CarCreatedEvent;
 import com.kodlamaio.commonpackage.utils.dto.ClientResponse;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -13,4 +14,7 @@ import java.util.UUID;
 public interface CarClient {
     @GetMapping(value = "/api/cars/check-car-available/{carId}")
     ClientResponse checkIfCarAvailable(@PathVariable UUID carId) throws InterruptedException;
+
+    @GetMapping(value = "/api/cars/get-car-for-invoice/{carId}")
+    CarCreatedEvent getById(@PathVariable UUID carId);
 }
