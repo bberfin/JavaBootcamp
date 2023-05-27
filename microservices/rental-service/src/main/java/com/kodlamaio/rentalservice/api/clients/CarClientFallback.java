@@ -1,6 +1,6 @@
 package com.kodlamaio.rentalservice.api.clients;
 
-import com.kodlamaio.commonpackage.events.inventory.CarCreatedEvent;
+import com.kodlamaio.commonpackage.utils.dto.CarClientResponse;
 import com.kodlamaio.commonpackage.utils.dto.ClientResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.errors.InterruptException;
@@ -18,7 +18,7 @@ public class CarClientFallback implements CarClient {
     }
 
     @Override
-    public CarCreatedEvent getById(UUID carId) {
+    public CarClientResponse getById(UUID carId) {
         log.info("INVENTORY SERVICE IS DOWN");
         throw new RuntimeException("INVENTORY SERVICE IS DOWN");
     }

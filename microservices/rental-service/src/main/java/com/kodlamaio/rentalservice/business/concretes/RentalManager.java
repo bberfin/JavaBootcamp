@@ -1,9 +1,9 @@
 package com.kodlamaio.rentalservice.business.concretes;
 
-import com.kodlamaio.commonpackage.events.inventory.CarCreatedEvent;
 import com.kodlamaio.commonpackage.events.rental.RentalCreatedEvent;
 import com.kodlamaio.commonpackage.events.rental.RentalDeletedEvent;
 import com.kodlamaio.commonpackage.events.rental.RentalInvoiceCreatedEvent;
+import com.kodlamaio.commonpackage.utils.dto.CarClientResponse;
 import com.kodlamaio.commonpackage.utils.dto.CreateRentalPaymentRequest;
 import com.kodlamaio.commonpackage.utils.kafka.producer.KafkaProducer;
 import com.kodlamaio.commonpackage.utils.mappers.ModelMapperService;
@@ -111,7 +111,7 @@ public class RentalManager implements RentalService {
 
     private void createInvoiceRequest(CreateRentalRequest createRentalRequest, RentalInvoiceCreatedEvent invoiceRequest, Rental rental) {
 
-        CarCreatedEvent car = carClient.getById(rental.getCarId());
+        CarClientResponse car = carClient.getById(rental.getCarId());
 
         invoiceRequest.setRentedAt(rental.getRentedAt());
         invoiceRequest.setModelName(car.getModelName());

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarClientResponse {
+public class CarClientResponse extends ClientResponse {
     private String modelName;
     private String brandName;
     private String plate;
