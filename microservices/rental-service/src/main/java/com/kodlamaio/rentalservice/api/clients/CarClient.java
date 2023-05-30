@@ -16,5 +16,5 @@ public interface CarClient {
     ClientResponse checkIfCarAvailable(@PathVariable UUID carId) throws InterruptedException;
 
     @GetMapping(value = "/api/cars/get-car-for-invoice/{carId}")
-    CarClientResponse getById(@PathVariable UUID carId);
+    CarClientResponse getById(@PathVariable UUID carId)throws InterruptedException;
 }

@@ -109,18 +109,26 @@ public class RentalManager implements RentalService {
         return rental.getDailyPrice() * rental.getRentedForDays();
     }
 
-    private void createInvoiceRequest(CreateRentalRequest createRentalRequest, RentalInvoiceCreatedEvent invoiceRequest, Rental rental) {
+    private void createInvoiceRequest(CreateRentalRequest createRentalRequest, RentalInvoiceCreatedEvent invoiceRequest, Rental rental) throws InterruptedException{
 
-        CarClientResponse car = carClient.getById(rental.getCarId());
+        CarClientResponse car = rules.getCarByIdForInvoice(rental.getCarId());
 
-        invoiceRequest.setRentedAt(rental.getRentedAt());
-        invoiceRequest.setModelName(car.getModelName());
-        invoiceRequest.setBrandName(car.getBrandName());
-        invoiceRequest.setDailyPrice(rental.getDailyPrice());
-        invoiceRequest.setPlate(car.getPlate());
-        invoiceRequest.setCardHolder(createRentalRequest.getPaymentRequest().getCardHolder());
-        invoiceRequest.setModelYear(car.getModelYear());
-        invoiceRequest.setRentedForDays(rental.getRentedForDays());
+
+        try{
+            invoiceRequest.setRentedAt(rental.getRentedAt());
+            invoiceRequest.setModelName(car.getModelName());
+            invoiceRequest.setBrandName(car.getBrandName());
+            invoiceRequest.setDailyPrice(rental.getDailyPrice());
+            invoiceRequest.setPlate(car.getPlate());
+            invoiceRequest.setCardHolder(createRentalRequest.getPaymentRequest().getCardHolder());
+            invoiceRequest.setModelYear(car.getModelYear());
+            invoiceRequest.setRentedForDays(rental.getRentedForDays());
+            car.setSuccess(true);
+        } catch (Exception e) {
+            car.setSuccess(false);
+            car.setMessage(e.getMessage());
+        }
+
     }
 
     private void sendKafkaRentalCreatedEvent(UUID carId) {

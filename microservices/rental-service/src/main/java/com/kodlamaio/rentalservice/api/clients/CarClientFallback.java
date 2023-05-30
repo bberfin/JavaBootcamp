@@ -18,7 +18,7 @@ public class CarClientFallback implements CarClient {
     }
 
     @Override
-    public CarClientResponse getById(UUID carId) {
+    public CarClientResponse getById(UUID carId) throws InterruptedException{
         log.info("INVENTORY SERVICE IS DOWN");
         throw new RuntimeException("INVENTORY SERVICE IS DOWN");
     }
